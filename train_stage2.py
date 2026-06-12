@@ -62,7 +62,7 @@ def main() -> int:
     )
     p_max = 256
 
-    primes = tier2_primes()
+    primes = [2, 3, 5, 7] + tier2_primes()
     g = torch.Generator().manual_seed(args.seed)
     primes = [primes[i] for i in torch.randperm(len(primes), generator=g).tolist()]
     held_primes = primes[: args.holdout_primes]
