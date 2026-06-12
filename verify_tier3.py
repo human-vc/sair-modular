@@ -109,6 +109,7 @@ def exp1(dev, p=8191, steps=25000, batch=16384, seed=0):
     held = torch.unique(torch.randint(0, p * p, (40000,), generator=torch.Generator().manual_seed(7), dtype=torch.long))[:20000]
     pool = pool[~torch.isin(pool, held)]
     rep = rep[~torch.isin(rep, held)]
+    pool, rep = pool.to(dev), rep.to(dev)
     tx, ty = (held // p).to(dev), (held % p).to(dev)
     tl = ((held // p) * (held % p) % p).to(dev)
 
