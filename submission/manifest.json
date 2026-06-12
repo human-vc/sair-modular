@@ -1,0 +1,7 @@
+{
+  "entry_class": "model.SairModMult",
+  "output_base": "p",
+  "framework": "pytorch",
+  "model_description": "p-conditioned MLP (~4.6M params). a mod p and b mod p are embedded with a shared residue table; a learned prime embedding FiLM-modulates the combined representation; residual MLP blocks decode to a single softmax over residue classes [0, p_max), masked to [0, p) so the emitted base-p digit is always a valid residue. Operands are reduced mod p before the network; the modular multiplication itself is learned.",
+  "training_description": "Trained from random init on the full enumerated (x, y, p) -> (x*y) mod p table over all primes in [16, 256) (the Tier-2 range). AdamW, weight decay 1.0, lr 1e-3 with cosine schedule, cross-entropy over masked residue classes, ~4.6M parameters. No precomputed discrete-log or lookup tables; accuracy collapses under weight perturbation."
+}
